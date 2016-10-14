@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ar.gob.cordoba.gobiernoabierto.puntoswifi" version="1.2.119" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>HelloCordova</name>
+    <name>PuntosWifi</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Mapa de los puntos de Wifi abierto de la Ciudad de Córdoba
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="gobiernoabiertocba@gmail.com" href="https://gobiernoabierto.cordoba.gob.ar/">
+        Secretaría de Modernización de la Ciudad de Córdoba
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -19,6 +19,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <icon density="hdpi" src="www/res/icono-64x64.png" />
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
 </widget>
