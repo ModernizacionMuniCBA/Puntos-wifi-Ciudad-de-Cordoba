@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' https://www.google.com *; 
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+                   media-src *;
+                   script-src 'self' https://gobiernoabierto.cordoba.gob.ar 'unsafe-inline' https://maps.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <meta charset="utf-8">
+    <title>Puntos WiFi de la Ciudad de Córdoba</title>
+    
+    <style>
+      html, body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        }
+      #map {
+       height: 85%;
+       width: 100%;
+       overflow: hidden;
+       float: left;
+       border: thin solid #333;
+       }
+      #base {
+       height: 15%;
+       width: 100%;
+       overflow: hidden;
+       float: left;
+       background-color: #ECECFB;
+       border: thin solid #333;
+       border-left: none;
+       }
+      #capture {
+       width: 70%;
+       height: 100%;
+       overflow: hidden;
+       float: left;
+       background-color: #ECECFB;
+       border: thin solid #333;
+       border-left: none;
+       }
+       #logomuni {
+       width: 30%;
+       height: 100%;
+       overflow: hidden;
+       float: left;
+       background-color: #FFFFFF;
+       border: thin solid #333;
+       border-left: none;
+       }
+    </style>
+  </head>
+  <body>
+    <script>
+      var map;
+      var src = 'https://www.google.com/maps/d/kml?mid=1JeoEjxGuDA97ryRorTbjyirDHqU';
+
+      /**
+       * Initializes the map and calls the function that creates polylines.
+       */
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(-19.257753, 146.823688),
+          zoom: 2,
+          mapTypeId: 'terrain'
+        });
+        loadKmlLayer(src, map);
+      }
+
+      /**
+       * Adds a KMLLayer based on the URL passed. Clicking on a marker
+       * results in the balloon content being loaded into the right-hand div.
+       * @param {string} src A URL for a KML file.
+       */
+      function loadKmlLayer(src, map) {
+        var kmlLayer = new google.maps.KmlLayer(src, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+        });
+        google.maps.event.addListener(kmlLayer, 'click', function(event) {
+          var content = event.featureData.infoWindowHtml;
+          var testimonial = document.getElementById('capture');
+          testimonial.innerHTML = content;
+        });
+       }
+      </script>
+    <div id="map"></div>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuKIYzH0mGnXXzwVsY3bxUgbGYfjYDPtk&callback=initMap">
+    </script>
+
+    <div id="base">
+    
+      <div id="logomuni">
+        <img src="res/icono-64x64.png" style="max-height: 70%; padding: 4px; float:left" />
+        
+        <div style="float:left">
+          Puntos de WiFi abierto de la Municipalidad de Córdoba
+        </div>
+
+      </div>
+    
+      <div id="capture"></div>
+    
+    </div>
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+  </body>
+</html>
